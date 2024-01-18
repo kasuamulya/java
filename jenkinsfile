@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    git 'https://github.com/kasuamulya/java.git'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    def mvnHome = tool 'Maven 3.6.3'
+                    sh "${mvnHome}/bin/mvn clean install"
+                }
+            }
+        }
+    }
+}
